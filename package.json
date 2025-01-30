@@ -4,7 +4,8 @@
   "description": "Curso 'Cypress Simulator' da Escola Talking About Testing.",
   "main": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "keywords": [
     "Testing",
@@ -14,7 +15,7 @@
     "GitHub Actions",
     "Escola TAT"
   ],
-  "author": "Leonardo <leolpc21@hotmai.com>",
+  "author": "Leonardo <leolpc21@hotmail.com>",
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
