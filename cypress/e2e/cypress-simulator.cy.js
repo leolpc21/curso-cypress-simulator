@@ -10,15 +10,11 @@ describe('Cypress Simulator', () => {
   });
 
   it('successfully simulates a Cypress command (e.g., cy.log("Yay!"))', () => {
-    cy.get('#codeInput').type("cy.log('Yay!')");
-    cy.get('#runButton').click();
-    cy.get('#outputArea', { timeout: 6000 })
-      .should('have.text', "Success:\n\ncy.log('Yay!') // Logged message 'Yay!'")
-      .and('be.visible');
+    cy.submeterCodigo("cy.log('Yay!')", "Success:\n\ncy.log('Yay!') // Logged message 'Yay!'");
   })
 
-  it('error: invalid cypress command', () => {
-
+  it('shows an error when entering and running an invalid Cypress command (e.g., cy.run())', () => {
+    cy.submeterCodigo('cy.run()', 'Error:\n\nInvalid Cypress command: cy.run()');
   })
 
   it('warning', () => {
