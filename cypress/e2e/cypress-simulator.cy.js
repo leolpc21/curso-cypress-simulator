@@ -17,8 +17,8 @@ describe('Cypress Simulator', () => {
     cy.submeterCodigo('cy.run()', 'Error:\n\nInvalid Cypress command: cy.run()');
   })
 
-  it('warning', () => {
-
+  it('it shows a warning when entering and running a not-implemented Cypress command (e.g., cy.contains("Login"))', () => {
+    cy.submeterCodigo('cy.contains("Login")', 'Warning:\n\nThe `cy.contains` command has not been implemented yet.');
   })
 
   it('error: valid command without parentheses', () => {
