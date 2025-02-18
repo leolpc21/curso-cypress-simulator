@@ -21,63 +21,63 @@ describe('Cypress Simulator', () => {
     cy.submeterCodigo('cy.contains("Login")', 'Warning:\n\nThe `cy.contains` command has not been implemented yet.');
   })
 
-  it('error: valid command without parentheses', () => {
+  it('it shows an error when entering and running a valid Cypress command without parentheses (e.g., cy.visit)', () => {
+    cy.submeterCodigo('cy.visit', 'Error:\n\nMissing parentheses on `cy.visit` command');
+  })
+
+  it.skip('help', () => {
 
   })
 
-  it('help', () => {
+  it.skip('maximize/minimize', () => {
 
   })
 
-  it('maximize/minimize', () => {
+  it.skip('logout', () => {
 
   })
 
-  it('logout', () => {
+  it.skip('show and hide logout button', () => {
 
   })
 
-  it('show and hide logout button', () => {
+  it.skip('running... state', () => {
 
   })
 
-  it('running... state', () => {
+  it.skip('accept cookies', () => {
 
   })
 
-  it('accept cookies', () => {
+  it.skip('decline cookies', () => {
 
   })
 
-  it('decline cookies', () => {
+  it.skip('captcha button state', () => {
 
   })
 
-  it('captcha button state', () => {
+  it.skip('captcha error', () => {
 
   })
 
-  it('captcha error', () => {
+  it.skip('run button - enable/disable states', () => {
 
   })
 
-  it('run button - enable/disable states', () => {
+  it.skip('reset textarea on logout and login', () => {
 
   })
 
-  it('reset textarea on logout and login', () => {
+  it.skip('disabled run button on logout and login', () => {
 
   })
 
-  it('disabled run button on logout and login', () => {
+  it.skip('reset output on logout and login', () => {
 
   })
 
-  it('reset output on logout and login', () => {
-
-  })
-
-  it('no cooking banner on the login page', () => {
+  it.skip('no cooking banner on the login page', () => {
 
   })
 })
