@@ -35,8 +35,25 @@ describe('Cypress Simulator', () => {
       .and('be.visible');
   })
 
-  it.skip('maximize/minimize', () => {
+  it('maximizes and minimizes a simulation result', () => {
+    cy.submeterCodigo("cy.log('Yay!')", 'Success:', "cy.log('Yay!') // Logged message 'Yay!'");
 
+    cy.get('.expand-collapse')
+      .should('have.attr', 'aria-expanded', 'false')
+      .click()
+
+    cy.get('#outputArea', { timeout: 6000 })
+      .should('contain', 'Success:')
+      .should('contain', "cy.log('Yay!') // Logged message 'Yay!'")
+      .and('be.visible');
+
+    cy.get('#collapseIcon').should('be.visible');
+
+    cy.get('.expand-collapse')
+      .should('have.attr', 'aria-expanded', 'true')
+      .click()
+
+    cy.get('#expandIcon').should('be.visible');
   })
 
   it.skip('logout', () => {
