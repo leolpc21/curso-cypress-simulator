@@ -3,7 +3,7 @@ describe('Cypress Simulator', () => {
   beforeEach(function () {
     cy.visit('./src/index.html?skipCaptcha=true', {
       onBeforeLoad(win) {
-        win.localStorage.setItem("cookieConsent", "accepted")
+        win.localStorage.setItem("cookieConsent", "accepted");
       }
     });
     cy.login();
@@ -40,7 +40,7 @@ describe('Cypress Simulator', () => {
 
     cy.get('.expand-collapse')
       .should('have.attr', 'aria-expanded', 'false')
-      .click()
+      .click();
 
     cy.get('#outputArea', { timeout: 6000 })
       .should('contain', 'Success:')
@@ -51,13 +51,17 @@ describe('Cypress Simulator', () => {
 
     cy.get('.expand-collapse')
       .should('have.attr', 'aria-expanded', 'true')
-      .click()
+      .click();
 
     cy.get('#expandIcon').should('be.visible');
   })
 
-  it.skip('logout', () => {
+  it('logs out successfully', () => {
+    cy.get("#sandwich-menu").click();
+    cy.contains("#logoutButton", "Logout").click();
 
+    cy.get("#login").should("be.visible");
+    cy.get("#sandwich-menu").should("not.be.visible");
   })
 
   it.skip('show and hide logout button', () => {
