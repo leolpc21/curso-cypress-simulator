@@ -1,5 +1,5 @@
 Cypress.Commands.add('login', () => {
-  cy.contains('button', 'Login').click()
+  cy.contains('button', 'Login').click();
 });
 
 Cypress.Commands.add('submeterCodigo', (code, title, message) => {
