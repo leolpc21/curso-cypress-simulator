@@ -4,10 +4,11 @@ declare namespace Cypress {
     /**
      * Submete um código para execução e verifica o resultado.
      * @param {string} code O código a ser executado.
+     * @param {string} title O título esperado na área de saída.
      * @param {string} message A mensagem esperada na área de saída.
-     * @example cy.submeterCodigo('cy.visit("https://example.com")', 'Visiting https://example.com');
+     * @example cy.submeterCodigo("cy.log('Yay!')", 'Success:', "cy.log('Yay!') // Logged message 'Yay!'");
      */
-    submeterCodigo(code: string, message: string): Chainable<null>
+    submeterCodigo(code: string, title: string, message: string): Chainable<null>
 
     /**
      * Visita a página e faz o login.
