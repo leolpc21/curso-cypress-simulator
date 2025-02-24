@@ -42,8 +42,7 @@ describe('Cypress Simulator', () => {
       .should('have.attr', 'aria-expanded', 'false')
       .click();
 
-    cy.get('#outputArea', { timeout: 6000 })
-      .should('contain', 'Success:')
+    cy.contains('#outputArea', 'Success:', { timeout: 6000 })
       .should('contain', "cy.log('Yay!') // Logged message 'Yay!'")
       .and('be.visible');
 
@@ -72,8 +71,19 @@ describe('Cypress Simulator', () => {
     cy.contains("#logoutButton", "Logout").should("not.be.visible");
   });
 
-  it.skip('running... state', () => {
+  it('shows the running state before showing the final result', () => {
+    cy.get('#codeInput').type('cy.run()');
+    cy.get('#runButton').click();
 
+    cy.contains('#runButton', 'Running...')
+      .should('be.visible')
+      .and('have.attr', 'disabled');
+    cy.contains('#outputArea', 'Running... Please wait.').should('be.visible');
+    cy.contains('#runButton', 'Running...', { timeout: 6000 }).should('not.exist');
+    cy.contains('#runButton', 'Run').should('be.visible');
+    cy.contains('#outputArea', 'Error:')
+      .should('contain', 'Invalid Cypress command: cy.run()')
+      .and('be.visible');
   });
 
   it.skip('accept cookies', () => {
