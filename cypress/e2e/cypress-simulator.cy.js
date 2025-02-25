@@ -86,14 +86,6 @@ describe('Cypress Simulator', () => {
       .and('be.visible');
   });
 
-  it.skip('accept cookies', () => {
-
-  });
-
-  it.skip('decline cookies', () => {
-
-  });
-
   it.skip('captcha button state', () => {
 
   });
@@ -119,6 +111,32 @@ describe('Cypress Simulator', () => {
   });
 
   it.skip('no cooking banner on the login page', () => {
+
+  });
+});
+
+describe('Cypress Simulator - Cookies consent', function () {
+  beforeEach(function () {
+    cy.visit('./src/index.html?skipCaptcha=true');
+    cy.login();
+  });
+
+  it('consents on the cookies usage', () => {
+    cy.contains('#acceptCookies', 'Accept').click();
+
+    cy.get('#cookieConsent').should('not.be.visible');
+    cy.window()
+      .its('localStorage.cookieConsent')
+      .should('eq', 'accepted');
+    // ou
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem('cookieConsent')).to.eq('accepted');
+    });
+    //ou
+    cy.getLocalStorage('cookieConsent').should('eq', 'accepted');
+  });
+
+  it.skip('decline cookies', () => {
 
   });
 });
