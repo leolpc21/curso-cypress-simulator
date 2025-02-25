@@ -1,5 +1,4 @@
 describe('Cypress Simulator', () => {
-
   beforeEach(function () {
     cy.visit('./src/index.html?skipCaptcha=true', {
       onBeforeLoad(win) {
@@ -77,21 +76,15 @@ describe('Cypress Simulator', () => {
 
     cy.contains('#runButton', 'Running...')
       .should('be.visible')
-      .and('have.attr', 'disabled');
+      .and('be.disabled');
     cy.contains('#outputArea', 'Running... Please wait.').should('be.visible');
     cy.contains('#runButton', 'Running...', { timeout: 6000 }).should('not.exist');
-    cy.contains('#runButton', 'Run').should('be.visible');
+    cy.contains('#runButton', 'Run')
+      .should('be.visible')
+      .and('not.be.disabled');
     cy.contains('#outputArea', 'Error:')
       .should('contain', 'Invalid Cypress command: cy.run()')
       .and('be.visible');
-  });
-
-  it.skip('captcha button state', () => {
-
-  });
-
-  it.skip('captcha error', () => {
-
   });
 
   it.skip('run button - enable/disable states', () => {
@@ -149,5 +142,29 @@ describe('Cypress Simulator - Cookies consent', function () {
     });
     //ou
     cy.getLocalStorage('cookieConsent').should('eq', 'declined');
+  });
+});
+
+describe('Cypress Simulator - Captcha', function () {
+  beforeEach(function () {
+    cy.visit('./src/index.html');
+    cy.login();
+  });
+
+  it("disables the captcha verify button when no answer is provided or it's cleared", () => {
+    cy.get('#verifyCaptcha').should('be.disabled');
+    cy.get('#captchaInput').type('1234');
+    cy.get('#verifyCaptcha').should('be.enabled');
+    cy.get('#captchaInput').clear();
+    cy.get('#verifyCaptcha').should('be.disabled');
+  });
+
+  it('shows an error on a wrong captcha answer and goes back to its initial state', () => {
+    cy.get('#captchaInput').type('1234');
+    cy.get('#verifyCaptcha').click();
+
+    cy.get('#captchaInput').should('have.value', '');
+    cy.get('#verifyCaptcha').should('be.disabled');
+    cy.contains('#captchaError', 'Incorrect answer, please try again.').should('be.visible');
   });
 });
