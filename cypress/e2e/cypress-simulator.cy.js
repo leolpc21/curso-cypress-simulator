@@ -136,7 +136,18 @@ describe('Cypress Simulator - Cookies consent', function () {
     cy.getLocalStorage('cookieConsent').should('eq', 'accepted');
   });
 
-  it.skip('decline cookies', () => {
+  it('declines on the cookies usage', () => {
+    cy.contains('#declineCookies', 'Decline').click();
 
+    cy.get('#cookieConsent').should('not.be.visible');
+    cy.window()
+      .its('localStorage.cookieConsent')
+      .should('eq', 'declined');
+    // ou
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem('cookieConsent')).to.eq('declined');
+    });
+    //ou
+    cy.getLocalStorage('cookieConsent').should('eq', 'declined');
   });
 });
