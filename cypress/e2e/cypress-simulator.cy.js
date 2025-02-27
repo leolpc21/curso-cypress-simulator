@@ -118,8 +118,12 @@ describe('Cypress Simulator', () => {
     cy.get('#outputArea').should('be.empty');
   });
 
-  it.skip('no cooking banner on the login page', () => {
+  it("doesn't show the cookie consent banner on the login page", () => {
+    cy.clearAllLocalStorage();
+    cy.reload();
+    cy.contains('button', 'Login').should('be.visible');
 
+    cy.get('#cookieConsent').should('not.be.visible');
   });
 });
 
@@ -157,6 +161,22 @@ describe('Cypress Simulator - Cookies consent', function () {
     });
     //ou
     cy.getLocalStorage('cookieConsent').should('eq', 'declined');
+  });
+
+  it("consents on the cookies usage and doesn't show the cookie consent banner on the login page", () => {
+    cy.contains('#acceptCookies', 'Accept').click();
+    cy.logout();
+    cy.login();
+
+    cy.get('#cookieConsent').should('not.be.visible');
+  });
+
+  it("declines on the cookies usage and doesn't show the cookie consent banner on the login page", () => {
+    cy.contains('#declineCookies', 'Decline').click();
+    cy.logout();
+    cy.login();
+
+    cy.get('#cookieConsent').should('not.be.visible');
   });
 });
 
