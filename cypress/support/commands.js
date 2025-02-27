@@ -10,3 +10,8 @@ Cypress.Commands.add('submeterCodigo', (code, title, message) => {
     .should('contain', message)
     .and('be.visible');
 });
+
+Cypress.Commands.add('logout', () => { 
+  cy.get("#sandwich-menu").click();
+  cy.contains("#logoutButton", "Logout").click();
+ });

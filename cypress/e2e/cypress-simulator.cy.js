@@ -54,9 +54,8 @@ describe('Cypress Simulator', () => {
     cy.get('#expandIcon').should('be.visible');
   });
 
-  it('logs out successfully', () => {
-    cy.get("#sandwich-menu").click();
-    cy.contains("#logoutButton", "Logout").click();
+  it('logout successfully', () => {
+    cy.logout();
 
     cy.get("#login").should("be.visible");
     cy.get("#sandwich-menu").should("not.be.visible");
@@ -95,16 +94,28 @@ describe('Cypress Simulator', () => {
     cy.get('#runButton').should('be.disabled');  
   });
 
-  it.skip('reset textarea on logout and login', () => {
+  it('clears the code input when logging off then logging in agai', () => {
+    cy.get('#codeInput').type('cy.run()');
+    cy.logout();
+    cy.login();
 
+    cy.get('#codeInput').should('be.empty');
   });
 
-  it.skip('disabled run button on logout and login', () => {
+  it('disables the run button when logging off then logging in again', () => {
+    cy.get('#codeInput').type('cy.run()');
+    cy.logout();
+    cy.login();
 
+    cy.get('#runButton').should('be.disabled');
   });
 
-  it.skip('reset output on logout and login', () => {
+  it('clears the code output when logging off then logging in again', () => {
+    cy.submeterCodigo('cy.run()', 'Error:', 'Invalid Cypress command: cy.run()');
+    cy.logout();
+    cy.login();
 
+    cy.get('#outputArea').should('be.empty');
   });
 
   it.skip('no cooking banner on the login page', () => {
