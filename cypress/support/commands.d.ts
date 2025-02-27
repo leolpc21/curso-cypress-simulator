@@ -15,5 +15,11 @@ declare namespace Cypress {
      * @example cy.login()
      */
     login(): Chainable<null>
+
+    /**
+     * Faz o logout.
+     * @example cy.logout()
+     */
+    logout(): Chainable<null>
   }
 }
