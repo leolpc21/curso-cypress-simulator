@@ -87,8 +87,12 @@ describe('Cypress Simulator', () => {
       .and('be.visible');
   });
 
-  it.skip('run button - enable/disable states', () => {
-
+  it('checks the run button disabled and enabled states', () => {
+    cy.get('#runButton').should('be.disabled');
+    cy.get('#codeInput').type('cy.run()');
+    cy.get('#runButton').should('be.enabled');
+    cy.get('#codeInput').clear();
+    cy.get('#runButton').should('be.disabled');  
   });
 
   it.skip('reset textarea on logout and login', () => {
