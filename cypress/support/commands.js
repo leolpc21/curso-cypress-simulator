@@ -13,5 +13,8 @@ Cypress.Commands.add('submeterCodigo', (code, title, message) => {
 
 Cypress.Commands.add('logout', () => { 
   cy.get("#sandwich-menu").click();
+
+  cy.checkA11y()
+  
   cy.contains("#logoutButton", "Logout").click();
  });

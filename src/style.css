@@ -183,8 +183,13 @@ button .spinner {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 pre {
@@ -562,6 +567,7 @@ nav#menu button:hover {
   text-align: center;
   font-size: 0.9rem;
   margin-top: 10px;
+  color: #AB1A0D;
 }
 
 button:disabled {
