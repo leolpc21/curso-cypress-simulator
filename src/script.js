@@ -573,7 +573,7 @@ For more commands and details, visit the <a href="https://docs.cypress.io/api/ta
 
       runButton.disabled = false
       runButton.classList.remove("loading")
-      runButton.innerHTML = "Runmmm"
+      runButton.innerHTML = "Rummn"
     }, (Math.floor(Math.random() * 5) + 1) * 1000)
   }
 })
