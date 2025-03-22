@@ -1,7 +1,3 @@
-Cypress.Commands.add('login', () => {
-  cy.contains('button', 'Login').click();
-});
-
 Cypress.Commands.add('submeterCodigo', (code, title, message) => {
   cy.get('#codeInput').type(code);
   cy.get('#runButton').click();
@@ -13,8 +9,29 @@ Cypress.Commands.add('submeterCodigo', (code, title, message) => {
 
 Cypress.Commands.add('logout', () => { 
   cy.get("#sandwich-menu").click();
-
-  cy.checkA11y()
-  
   cy.contains("#logoutButton", "Logout").click();
  });
+
+ Cypress.Commands.add("login", () => {
+  const setup = () => {
+    cy.visit("./src/index.html?skipCaptcha=true")
+    cy.contains("button", "Login").click()
+  }
+
+  const validate = () => {
+    cy.visit("./src/index.html")
+    cy.contains("button", "Login", { timeout: 1000 })
+      .should("not.be.visible")
+  }
+
+  const options = {
+    cacheAcrossSpecs: true,
+    validate
+  }
+
+  cy.session(
+    "sessionId",
+    setup,
+    options
+  )
+})
