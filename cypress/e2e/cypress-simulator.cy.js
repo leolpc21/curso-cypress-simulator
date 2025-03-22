@@ -1,11 +1,11 @@
 describe('Cypress Simulator', () => {
   beforeEach(function () {
+    cy.login();
     cy.visit('./src/index.html?skipCaptcha=true', {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted");
       }
     });
-    cy.login();
   });
 
   it('shows an error when entering and running a valid Cypress command without parentheses (e.g., cy.visit)', () => {
@@ -20,10 +20,10 @@ describe('Cypress Simulator', () => {
     cy.get('#runButton').should('be.disabled');  
   });
 
-  it('clears the code input when logging off then logging in agai', () => {
+  it('clears the code input when logging off then logging in again', () => {
     cy.get('#codeInput').type('cy.run()');
     cy.logout();
-    cy.login();
+    cy.contains("button", "Login").click()
 
     cy.get('#codeInput').should('be.empty');
   });
@@ -31,7 +31,7 @@ describe('Cypress Simulator', () => {
   it('disables the run button when logging off then logging in again', () => {
     cy.get('#codeInput').type('cy.run()');
     cy.logout();
-    cy.login();
+    cy.contains("button", "Login").click()
 
     cy.get('#runButton').should('be.disabled');
   });
@@ -39,7 +39,7 @@ describe('Cypress Simulator', () => {
   it('clears the code output when logging off then logging in again', () => {
     cy.submeterCodigo('cy.run()', 'Error:', 'Invalid Cypress command: cy.run()');
     cy.logout();
-    cy.login();
+    cy.contains("button", "Login").click()
 
     cy.get('#outputArea').should('be.empty');
   });
@@ -55,8 +55,8 @@ describe('Cypress Simulator', () => {
 
 describe('Cypress Simulator - Cookies consent', function () {
   beforeEach(function () {
-    cy.visit('./src/index.html?skipCaptcha=true');
     cy.login();
+    cy.visit('./src/index.html?skipCaptcha=true');
   });
 
   it('declines on the cookies usage', () => {
@@ -77,7 +77,7 @@ describe('Cypress Simulator - Cookies consent', function () {
   it("consents on the cookies usage and doesn't show the cookie consent banner on the login page", () => {
     cy.contains('#acceptCookies', 'Accept').click();
     cy.logout();
-    cy.login();
+    cy.contains("button", "Login").click()
 
     cy.get('#cookieConsent').should('not.be.visible');
   });
@@ -85,7 +85,7 @@ describe('Cypress Simulator - Cookies consent', function () {
   it("declines on the cookies usage and doesn't show the cookie consent banner on the login page", () => {
     cy.contains('#declineCookies', 'Decline').click();
     cy.logout();
-    cy.login();
+    cy.contains("button", "Login").click()
 
     cy.get('#cookieConsent').should('not.be.visible');
   });

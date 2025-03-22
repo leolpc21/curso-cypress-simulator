@@ -1,11 +1,11 @@
 describe("Cypress Simulator - A11y Checks", () => {
   beforeEach(() => {
+    cy.login()
     cy.visit("./src/index.html?skipCaptcha=true", {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted")
       }
     })
-    cy.contains("button", "Login").click()
     cy.injectAxe()
   })
 
@@ -62,7 +62,11 @@ describe("Cypress Simulator - A11y Checks", () => {
   });
 
   it('logs out successfully', () => {
-    cy.logout();
+    cy.get("#sandwich-menu").click();
+
+    cy.checkA11y()
+    
+    cy.contains("#logoutButton", "Logout").click();
 
     cy.get("#login").should("be.visible");
     cy.get("#sandwich-menu").should("not.be.visible");
@@ -104,8 +108,8 @@ describe("Cypress Simulator - A11y Checks", () => {
 
 describe('Cypress Simulator - Cookies consent', function () {
   beforeEach(function () {
-    cy.visit('./src/index.html?skipCaptcha=true');
     cy.login();
+    cy.visit('./src/index.html?skipCaptcha=true');
     cy.injectAxe()
   });
 
@@ -128,7 +132,7 @@ describe('Cypress Simulator - Cookies consent', function () {
 describe('Cypress Simulator - Captcha', function () {
   beforeEach(function () {
     cy.visit('./src/index.html');
-    cy.login();
+    cy.contains("button", "Login").click()
     cy.injectAxe()
   });
 
