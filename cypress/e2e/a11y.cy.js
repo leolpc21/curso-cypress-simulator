@@ -1,7 +1,7 @@
 describe("Cypress Simulator - A11y Checks", () => {
   beforeEach(() => {
     cy.login()
-    cy.visit("./src/index.html?skipCaptcha=true", {
+    cy.visit("./src/index.html?skipCaptcha=true&chancesOfError=0", {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted")
       }
@@ -9,12 +9,10 @@ describe("Cypress Simulator - A11y Checks", () => {
     cy.injectAxe()
   })
 
-  Cypress._.times(100, () => {
-    it('successfully simulates a Cypress command (e.g., cy.log("Yay!"))', () => {
-      cy.submeterCodigo("cy.log('Yay!')", "Success:", "cy.log('Yay!') // Logged message 'Yay!'");
+  it('successfully simulates a Cypress command (e.g., cy.log("Yay!"))', () => {
+    cy.submeterCodigo("cy.log('Yay!')", "Success:", "cy.log('Yay!') // Logged message 'Yay!'");
 
-      cy.checkA11y('.success')
-    });
+    cy.checkA11y('.success')
   });
 
   it('shows an error when entering and running an invalid Cypress command (e.g., cy.run())', () => {
@@ -111,7 +109,7 @@ describe("Cypress Simulator - A11y Checks", () => {
 describe('Cypress Simulator - Cookies consent', function () {
   beforeEach(function () {
     cy.login();
-    cy.visit('./src/index.html?skipCaptcha=true');
+    cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0');
     cy.injectAxe()
   });
 
@@ -133,7 +131,7 @@ describe('Cypress Simulator - Cookies consent', function () {
 
 describe('Cypress Simulator - Captcha', function () {
   beforeEach(function () {
-    cy.visit('./src/index.html');
+    cy.visit('./src/index.html?chancesOfError=0');
     cy.contains("button", "Login").click()
     cy.injectAxe()
   });
