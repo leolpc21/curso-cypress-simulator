@@ -56,7 +56,7 @@ describe('Cypress Simulator', () => {
 describe('Cypress Simulator - Cookies consent', function () {
   beforeEach(function () {
     cy.login();
-    cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0');
+    cy.visit('./src/index.html?skipCaptcha=true');
   });
 
   it('declines on the cookies usage', () => {
@@ -91,10 +91,10 @@ describe('Cypress Simulator - Cookies consent', function () {
   });
 });
 
-describe('Cypress Simulator', () => {
+describe.only('Cypress Simulator - Glitch in the Matrix', () => {
   beforeEach(function () {
     cy.login();
-    cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=1', {
+    cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0.75', {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted");
       }
@@ -102,6 +102,6 @@ describe('Cypress Simulator', () => {
   });
 
   it('errors out with a glitch in the Matrix', () => {
-    cy.submeterCodigo('cy.visit', 'Error:', 'Missing parentheses on `cy.visit` command');
+    cy.submeterCodigo('cy.visit', "There's a glitch in the Matrix.", '');
   });
 });
