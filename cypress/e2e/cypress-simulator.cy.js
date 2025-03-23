@@ -1,7 +1,7 @@
 describe('Cypress Simulator', () => {
   beforeEach(function () {
     cy.login();
-    cy.visit('./src/index.html?skipCaptcha=true', {
+    cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0', {
       onBeforeLoad(win) {
         win.localStorage.setItem("cookieConsent", "accepted");
       }
@@ -17,7 +17,7 @@ describe('Cypress Simulator', () => {
     cy.get('#codeInput').type('cy.run()');
     cy.get('#runButton').should('be.enabled');
     cy.get('#codeInput').clear();
-    cy.get('#runButton').should('be.disabled');  
+    cy.get('#runButton').should('be.disabled');
   });
 
   it('clears the code input when logging off then logging in again', () => {
@@ -56,7 +56,7 @@ describe('Cypress Simulator', () => {
 describe('Cypress Simulator - Cookies consent', function () {
   beforeEach(function () {
     cy.login();
-    cy.visit('./src/index.html?skipCaptcha=true');
+    cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0');
   });
 
   it('declines on the cookies usage', () => {
@@ -88,5 +88,20 @@ describe('Cypress Simulator - Cookies consent', function () {
     cy.contains("button", "Login").click()
 
     cy.get('#cookieConsent').should('not.be.visible');
+  });
+});
+
+describe('Cypress Simulator', () => {
+  beforeEach(function () {
+    cy.login();
+    cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=1', {
+      onBeforeLoad(win) {
+        win.localStorage.setItem("cookieConsent", "accepted");
+      }
+    });
+  });
+
+  it('errors out with a glitch in the Matrix', () => {
+    cy.submeterCodigo('cy.visit', 'Error:', 'Missing parentheses on `cy.visit` command');
   });
 });
