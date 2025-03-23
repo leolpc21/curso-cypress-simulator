@@ -11,8 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get current date and time
-        run: echo "DATETIME=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+      - name: Get current date and time (adjusted for timezone)
+        run: echo "DATETIME=$(date -d '-3 hours' +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
 
       - name: Run Cypress tests in parallel 🧪
         uses: cypress-io/github-action@v6
