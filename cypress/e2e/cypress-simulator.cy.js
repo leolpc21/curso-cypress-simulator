@@ -3,7 +3,7 @@ describe('Cypress Simulator', () => {
     cy.login();
     cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0', {
       onBeforeLoad(win) {
-        win.localStorage.setItem("cookieConsent", "accepted");
+        win.localStorage.setItem('cookieConsent', 'accepted');
       }
     });
   });
@@ -23,7 +23,7 @@ describe('Cypress Simulator', () => {
   it('clears the code input when logging off then logging in again', () => {
     cy.get('#codeInput').type('cy.run()');
     cy.logout();
-    cy.contains("button", "Login").click()
+    cy.contains('button', 'Login').click();
 
     cy.get('#codeInput').should('be.empty');
   });
@@ -31,7 +31,7 @@ describe('Cypress Simulator', () => {
   it('disables the run button when logging off then logging in again', () => {
     cy.get('#codeInput').type('cy.run()');
     cy.logout();
-    cy.contains("button", "Login").click()
+    cy.contains('button', 'Login').click();
 
     cy.get('#runButton').should('be.disabled');
   });
@@ -39,12 +39,12 @@ describe('Cypress Simulator', () => {
   it('clears the code output when logging off then logging in again', () => {
     cy.submeterCodigo('cy.run()', 'Error:', 'Invalid Cypress command: cy.run()');
     cy.logout();
-    cy.contains("button", "Login").click()
+    cy.contains('button', 'Login').click();
 
     cy.get('#outputArea').should('be.empty');
   });
 
-  it("doesn't show the cookie consent banner on the login page", () => {
+  it('doesn`t show the cookie consent banner on the login page', () => {
     cy.clearAllLocalStorage();
     cy.reload();
     cy.contains('button', 'Login').should('be.visible');
@@ -74,18 +74,18 @@ describe('Cypress Simulator - Cookies consent', function () {
     cy.getLocalStorage('cookieConsent').should('eq', 'declined');
   });
 
-  it("consents on the cookies usage and doesn't show the cookie consent banner on the login page", () => {
+  it('consents on the cookies usage and doesn`t show the cookie consent banner on the login page', () => {
     cy.contains('#acceptCookies', 'Accept').click();
     cy.logout();
-    cy.contains("button", "Login").click()
+    cy.contains('button', 'Login').click();
 
     cy.get('#cookieConsent').should('not.be.visible');
   });
 
-  it("declines on the cookies usage and doesn't show the cookie consent banner on the login page", () => {
+  it('declines on the cookies usage and doesn`t show the cookie consent banner on the login page', () => {
     cy.contains('#declineCookies', 'Decline').click();
     cy.logout();
-    cy.contains("button", "Login").click()
+    cy.contains('button', 'Login').click();
 
     cy.get('#cookieConsent').should('not.be.visible');
   });
@@ -96,12 +96,12 @@ describe('Cypress Simulator - Glitch in the Matrix', () => {
     cy.login();
     cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0.75', {
       onBeforeLoad(win) {
-        win.localStorage.setItem("cookieConsent", "accepted");
+        win.localStorage.setItem('cookieConsent', 'accepted');
       }
     });
   });
 
   it('errors out with a glitch in the Matrix', () => {
-    cy.submeterCodigo('cy.visit', "There's a glitch in the Matrix.", '');
+    cy.submeterCodigo('cy.visit', 'There`s a glitch in the Matrix.', '');
   });
 });

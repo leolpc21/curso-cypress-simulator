@@ -7,7 +7,16 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "pull:main": "git switch main && git pull",
-    "nova": "node script.js"
+    "nova": "node script.js",
+    "lint": "eslint",
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky install",
+    "lint-staged-script": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
   },
   "keywords": [
     "Testing",
@@ -22,11 +31,13 @@
   "type": "commonjs",
   "devDependencies": {
     "axe-core": "^4.10.2",
-    "cypress": "^13.17.0",
-    "cypress-axe": "^1.5.0",
-    "cypress-split": "^1.24.7"
-  },
-  "dependencies": {
-    "cypress-localstorage-commands": "^2.2.7"
+    "cypress": "^14.2.0",
+    "cypress-axe": "^1.6.0",
+    "cypress-split": "^1.24.14",
+    "cypress-localstorage-commands": "^2.2.7",
+    "eslint": "^8.53.0",
+    "eslint-plugin-cypress": "2.11.3",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0"
   }
 }
