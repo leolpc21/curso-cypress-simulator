@@ -91,7 +91,7 @@ describe('Cypress Simulator - Cookies consent', function () {
   });
 });
 
-describe.only('Cypress Simulator - Glitch in the Matrix', () => {
+describe('Cypress Simulator - Glitch in the Matrix', () => {
   beforeEach(function () {
     cy.login();
     cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0.75', {
