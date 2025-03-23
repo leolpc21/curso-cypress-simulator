@@ -109,7 +109,7 @@ describe("Cypress Simulator - A11y Checks", () => {
 describe('Cypress Simulator - Cookies consent', function () {
   beforeEach(function () {
     cy.login();
-    cy.visit('./src/index.html?skipCaptcha=true&chancesOfError=0');
+    cy.visit('./src/index.html?skipCaptcha=true');
     cy.injectAxe()
   });
 
@@ -131,7 +131,7 @@ describe('Cypress Simulator - Cookies consent', function () {
 
 describe('Cypress Simulator - Captcha', function () {
   beforeEach(function () {
-    cy.visit('./src/index.html?chancesOfError=0');
+    cy.visit('./src/index.html');
     cy.contains("button", "Login").click()
     cy.injectAxe()
   });
