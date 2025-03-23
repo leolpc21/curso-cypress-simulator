@@ -9,10 +9,12 @@ describe("Cypress Simulator - A11y Checks", () => {
     cy.injectAxe()
   })
 
-  it('successfully simulates a Cypress command (e.g., cy.log("Yay!"))', () => {
-    cy.submeterCodigo("cy.log('Yay!')", "Success:", "cy.log('Yay!') // Logged message 'Yay!'");
+  Cypress._.times(100, () => {
+    it('successfully simulates a Cypress command (e.g., cy.log("Yay!"))', () => {
+      cy.submeterCodigo("cy.log('Yay!')", "Success:", "cy.log('Yay!') // Logged message 'Yay!'");
 
-    cy.checkA11y('.success')
+      cy.checkA11y('.success')
+    });
   });
 
   it('shows an error when entering and running an invalid Cypress command (e.g., cy.run())', () => {
@@ -36,7 +38,7 @@ describe("Cypress Simulator - A11y Checks", () => {
       .and('have.attr', 'rel', 'noopener noreferrer')
       .and('be.visible');
 
-      cy.checkA11y('#outputArea')
+    cy.checkA11y('#outputArea')
   });
 
   it('maximizes and minimizes a simulation result', () => {
@@ -65,7 +67,7 @@ describe("Cypress Simulator - A11y Checks", () => {
     cy.get("#sandwich-menu").click();
 
     cy.checkA11y()
-    
+
     cy.contains("#logoutButton", "Logout").click();
 
     cy.get("#login").should("be.visible");
