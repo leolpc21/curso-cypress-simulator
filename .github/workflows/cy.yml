@@ -10,15 +10,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Get current date and time
+        run: echo "DATETIME=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+
       - name: Run Cypress tests in parallel 🧪
         uses: cypress-io/github-action@v6
         env:
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
+
       - name: Save screenshots in case of failures
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: cypress-screenshots
+          name: cypress-screenshots-${{ env.DATETIME }}
           path: cypress/screenshots
           if-no-files-found: ignore
