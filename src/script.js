@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const verifyCaptchaButton = document.getElementById('verifyCaptcha');
   const captchaError = document.getElementById('captchaError');
 
-  // eslint-disable-next-line no-undef
+
   lucide.createIcons();
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -402,7 +402,7 @@ For more commands and details, visit the <a href="https://docs.cypress.io/api/ta
 
         const command = code.split('(')[0];
 
-        // eslint-disable-next-line no-prototype-builtins
+
         if (cypressCommands.hasOwnProperty(command)) {
           switch (command) {
           case 'cy.visit':
